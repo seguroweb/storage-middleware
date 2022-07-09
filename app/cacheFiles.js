@@ -34,7 +34,7 @@ const uploadCache = async (req,res,next, options) => {
         //genera la peticion
         const result = await axios({
             headers: {
-                "Content-Type": "multipart/form-data; boundary=???*?*?***",
+                "Content-Type": "multipart/form-data; boundary=???",
                 "Accept": "*/*",
                 'accept-encoding': 'gzip, deflate, br',
                 // validar con token-key
@@ -51,7 +51,7 @@ const uploadCache = async (req,res,next, options) => {
         next();
     } catch (error) {
         //console.log(error)
-        res.send({msg: 'ErrorStoraMiddleware: error al subir los archivos'})
+        res.send({msg: 'ErrorStorageMiddleware: error al subir los archivos'})
     }
 }
 

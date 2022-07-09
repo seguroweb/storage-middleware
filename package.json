@@ -1,5 +1,5 @@
 {
-  "name": "storage-middlware-gys",
+  "name": "storage-middleware-gys",
   "version": "0.0.2",
   "description": "middleware para el manejo de archivos para gyssrl",
   "main": "index.js",
