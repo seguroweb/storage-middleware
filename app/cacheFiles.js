@@ -10,7 +10,7 @@ const upload = multer({storage:Storage}).array('recfile')
 const cacheFiles = (req,res,next) => {
     upload(req,res,next, function(e){
         // si no se puede cachear los archivos enviar un error
-        if(e) return res.send('error al guardar en cache los archivos');
+        if(e) return res.send('ErrorStorageMiddleware: error al guardar en cache los archivos');
         
         // pasa al siguiente middleware
         next()
