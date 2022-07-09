@@ -28,7 +28,7 @@ const uploadCache = async (req,res,next, options) => {
     try {
         for (const file of req.files) {
             // agrega los archivos al formulario
-            form.append('recfile[]', file.buffer, file.originalname);
+            form.append('recfile', file.buffer, file.originalname);
         }
 
         //genera la peticion
