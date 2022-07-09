@@ -44,8 +44,8 @@ const uploadCache = async (req,res,next, options) => {
             data: form
         })
 
-        // setea el ojeto req
-        req.filesUploaded = result;
+        // setea el ojeto req con la respuesta de la api
+        req.filesUploaded = result.data;
 
         // avanza al controller
         next();
