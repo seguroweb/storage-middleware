@@ -21,7 +21,7 @@ const cacheFiles = (req, res, next) => {
 const uploadCache = async (req, res, next, options) => {
     // credenciales y opciones pasadas al constructor
     const { url, api_key_storage, field_name_form } = options;
-    const { scope } = req.headers
+    const scope = req.headers.scope ||  options.scope || 'public'
 
     const field_name = field_name_form || 'recfile';
 
