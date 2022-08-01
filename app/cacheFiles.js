@@ -20,8 +20,7 @@ const cacheFiles = (req, res, next) => {
 // enviar los archivos cacheados a la api
 const uploadCache = async (req, res, next, options) => {
     // credenciales y opciones pasadas al constructor
-    const { url, api_key_storage, field_name_form } = options;
-    const scope = req.headers.scope ||  options.scope || 'public'
+    const { url, api_key_storage, field_name_form, project, scope } = options;
 
     const field_name = field_name_form || 'recfile';
 
@@ -44,10 +43,12 @@ const uploadCache = async (req, res, next, options) => {
                 "Content-Type": "multipart/form-data; boundary=??????",
                 "Accept": "*/*",
                 "accept-encoding": "gzip, deflate, br",
-                "api_key_storage": api_key_storage
+                "api_key_storage": api_key_storage,
+                "scope": scope || 'public',
+                "project": project || 'test'
             },
             method: 'post',
-            url: url + '/' + scope,
+            url: url,
             data: form
         })
 
