@@ -1,6 +1,6 @@
 {
   "name": "storage-middleware-gys",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "middleware para el manejo de archivos para gyssrl",
   "main": "index.js",
   "scripts": {
