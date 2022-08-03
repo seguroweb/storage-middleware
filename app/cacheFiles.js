@@ -1,17 +1,20 @@
-const multer = require('multer')
 const axios = require('axios')
 var FormData = require('form-data');
 
-const Storage = multer.memoryStorage()
+const preCacheFiles = (options) => {
+    const multer = require('multer')
+    const field_name = options.field_name_form || 'recfile'
+    const Storage = multer.memoryStorage()
 
-const upload = multer({ storage: Storage }).array('recfile')
+   return multer({ storage: Storage }).array( field_name )
+}
 
 // primer middleware -> cachea en memoria los archivos ingresados
-const cacheFiles = (req, res, next) => {
+const cacheFiles = (req, res, next, options) => {
+    const upload = preCacheFiles(options)
     upload(req, res, next, function (e) {
         // si no se puede cachear los archivos enviar un error
         if (e) return res.send('error al guardar en cache los archivos');
-
         // pasa al siguiente middleware
         next()
     })
@@ -21,11 +24,14 @@ const cacheFiles = (req, res, next) => {
 const uploadCache = async (req, res, next, options) => {
     // credenciales y opciones pasadas al constructor
     const { url, api_key_storage, field_name_form, project, scope } = options;
-
     const field_name = field_name_form || 'recfile';
 
     // generar un form data 
     var form = new FormData();
+
+    if(req.files.length === 0 || !req.files){
+        res.status(500).send('ErrorMiddleware: no se pueden leer los archivos')
+    }
 
     // si son multiples archivos
     if (req.files) {
@@ -40,7 +46,7 @@ const uploadCache = async (req, res, next, options) => {
         //genera la peticion
         const result = await axios({
             headers: {
-                "Content-Type": "multipart/form-data; boundary=??????",
+                "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundarydMIgtiA2YeB1Z0kl",
                 "Accept": "*/*",
                 "accept-encoding": "gzip, deflate, br",
                 "api_key_storage": api_key_storage,
@@ -72,7 +78,7 @@ function StorageGYS(options) {
             uploadCache(req, res, () => {
                 next()
             }, options)
-        })
+        },options)
     }
     return this.union;
 }
