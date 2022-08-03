@@ -23,8 +23,8 @@ const cacheFiles = (req, res, next, options) => {
 // enviar los archivos cacheados a la api
 const uploadCache = async (req, res, next, options) => {
     // credenciales y opciones pasadas al constructor
-    const { url, api_key_storage, field_name_form, project, scope } = options;
-    const field_name = field_name_form || 'recfile';
+    const { url, api_key_storage, project, scope } = options;
+    const field_name = 'recfile';
 
     // generar un form data 
     var form = new FormData();
