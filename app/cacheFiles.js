@@ -49,7 +49,7 @@ const uploadCache = async (req, res, next, options) => {
                 "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundarydMIgtiA2YeB1Z0kl",
                 "Accept": "*/*",
                 "accept-encoding": "gzip, deflate, br",
-                "api_key_storage": api_key_storage,
+                "keystorage": api_key_storage,
                 "scope": scope || 'public',
                 "project": project || 'test'
             },
