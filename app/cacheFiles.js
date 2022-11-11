@@ -64,9 +64,8 @@ const uploadCache = async (req, res, next, options) => {
         // avanza al controller
         next();
     } catch (error) {
-        console.log(error.response)
-        const { data } = error.response
-        res.send({ msg: 'ErrorStorageMiddleware: error al subir los archivos', data })
+        console.log(error)
+        res.send({ msg: 'ErrorStorageMiddleware: error al subir los archivos' })
     }
 }
 
